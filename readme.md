@@ -8,3 +8,5 @@ everyone is feeling warm and fuzzy.
 A WAMP stack will be utilized to host the MySQL database and
 PyCharm will be our IDE of choice. Github will provide version control so we can ensure that everything
 comes out purr-fect.
+
+Thank you!
