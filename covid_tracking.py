@@ -16,8 +16,8 @@ import matplotlib.pyplot as plt
 # # Reviewing the data # #
 online_data = r'https://data.cdc.gov/api/views/9mfq-cb36/rows.csv'
 tables = pd.read_csv(online_data)
-print(tables.head(10))  # getting first5 entries of dataframe
-print(tables.tail(10))  # getting first5 entries of dataframe
+print(tables.head(10))  # getting first 10 entries of dataframe
+print(tables.tail(10))  # getting last 10 entries of dataframe
 
 # how big is this data
 tables.shape
@@ -33,7 +33,6 @@ def connect_to_sql():
                                    host='127.0.0.1', database='CovidTracking')
     return conn
 
-####engine = create_engine(f"mysql+mysqlconnector://{user}:{password}@{hostname}/{database}")
 
 # # create table 'covid' structure # #
 #######def create_tables(cursor):
@@ -43,4 +42,12 @@ def connect_to_sql():
 
 
 # # delete columns
+
+
+# # pull table from pandas
+
+
+
+
+# # plots
 
