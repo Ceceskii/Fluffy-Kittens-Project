@@ -53,6 +53,14 @@ connection.execute(text('ALTER TABLE covid_2 RENAME TO covid'))
 df = pd.read_sql_table('covid', connection)
 
 # # prepping plots
+# https://pandas.pydata.org/docs/reference/plotting.html
+pandas.plotting.scatter_matrix(frame, alpha=0.5, figsize=None, ax=None, grid=False, diagonal='hist', marker='.', density_kwds=None, hist_kwds=None, range_padding=0.05, **kwargs)
+df = pd.DataFrame(np.random.randn(1000, 2), columns=['state', 'conf_death'])
+pd.plotting.scatter_matrix(df, alpha=0.2)
+axs.set_xlable('States')
+axs.set_ylabel('Confirmed Death')
+axs.set_title('Covid Total Death Countrywide')
 
+plt.show()
 
-
+connection.close
