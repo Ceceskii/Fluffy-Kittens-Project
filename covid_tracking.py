@@ -49,17 +49,10 @@ connection.execute(text('INSERT INTO covid_2 SELECT DISTINCT * FROM covid'))
 connection.execute(text('DROP TABLE covid'))
 connection.execute(text('ALTER TABLE covid_2 RENAME TO covid'))
 
+# https://pandas.pydata.org/docs/reference/api/pandas.read_sql_table.html
+df = pd.read_sql_table('covid', connection)
+
+# # prepping plots
 
 
-
-
-# # delete columns
-
-
-# # pull table from pandas
-
-
-
-
-# # plots
 
