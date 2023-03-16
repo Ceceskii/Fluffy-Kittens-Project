@@ -54,8 +54,18 @@ df = pd.read_sql_table('covid', connection)
 
 # # prepping plots
 # https://pandas.pydata.org/docs/reference/plotting.html
+# https://matplotlib.org/stable/gallery/lines_bars_and_markers/simple_plot.html#sphx-glr-gallery-lines-bars-and-markers-simple-plot-py
 
+# Group the data by state and find the largest tot_death value for each state
+max_deaths = df.groupby('state')['tot_death'].max().sort_values(ascending=False)[:10]
 
+# Bar graph of the top 10 states with the largest tot_death
+plt.figure(figsize=(5, 2))
+plt.bar(max_deaths.index, max_deaths.values)
+plt.title('States with the Largest Number of COVID-19 Deaths')
+plt.xlabel('State')
+plt.ylabel('Total Deaths')
+plt.show()
 
 
 plt.show()
