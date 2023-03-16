@@ -14,7 +14,9 @@ from sqlalchemy import text
 import matplotlib.pyplot as plt
 
 # # Reviewing the data # #
-online_data = r'https://data.cdc.gov/api/views/9mfq-cb36/rows.csv'
+#https://api.covidtracking.com/v1/us/daily.csv
+#https://data.cdc.gov/api/views/9mfq-cb36/rows.csv
+online_data = r'https://api.covidtracking.com/v1/us/daily.csv'
 tables = pd.read_csv(online_data)
 print(tables.head(10))  # getting first 10 entries of dataframe
 print(tables.tail(10))  # getting last 10 entries of dataframe
@@ -30,12 +32,13 @@ print(tables.dtypes)
 hostname="127.0.0.1"
 username="root"
 passwd=""
-db_name="covidtracking"
+db_name="FluffyTrack"
 
 # install pymysql and sqlalchemy
 engine = create_engine("mysql+pymysql://{user}:{pw}@{host}/{db}".format(host=hostname, db=db_name, user=username, pw=passwd))
 # review and download data
-tables = pd.read_csv('https://data.cdc.gov/api/views/9mfq-cb36/rows.csv')
+tables = pd.read_csv('https://api.covidtracking.com/v1/us/daily.csv')
+#tables = pd.read_csv('https://api.covidtracking.com/v1/us/daily.csv')
 tables.rename(columns = {'submission_date':'date'}, inplace=True) #rename for better understanding on data
 
 # connect to db
@@ -49,25 +52,5 @@ connection.execute(text('INSERT INTO covid_2 SELECT DISTINCT * FROM covid'))
 connection.execute(text('DROP TABLE covid'))
 connection.execute(text('ALTER TABLE covid_2 RENAME TO covid'))
 
-# https://pandas.pydata.org/docs/reference/api/pandas.read_sql_table.html
 df = pd.read_sql_table('covid', connection)
-
-# # prepping plots
-# https://pandas.pydata.org/docs/reference/plotting.html
-# https://matplotlib.org/stable/gallery/lines_bars_and_markers/simple_plot.html#sphx-glr-gallery-lines-bars-and-markers-simple-plot-py
-
-# Group the data by state and find the largest tot_death value for each state
-max_deaths = df.groupby('state')['tot_death'].max().sort_values(ascending=False)[:10]
-
-# Bar graph of the top 10 states with the largest tot_death
-plt.figure(figsize=(5, 2))
-plt.bar(max_deaths.index, max_deaths.values)
-plt.title('States with the Largest Number of COVID-19 Deaths')
-plt.xlabel('State')
-plt.ylabel('Total Deaths')
-plt.show()
-
-
-plt.show()
-connection.close
 
