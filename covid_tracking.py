@@ -58,7 +58,12 @@ df = pd.read_csv('https://api.covidtracking.com/v1/us/daily.csv')
 
 
 df['date'] = pd.to_datetime(df['date'], format='%Y%m%d')
+fig, ax = plt.subplots()
+labels = 'Positive', 'Negative', 'Pending'
+sizes = [df['positive'].max(), df['negative'].max(), df['pending'].max()]
+ax.pie(sizes, labels=labels, autopct='%1.1f%%')
 
+plt.show()
 
 fig, ax = plt.subplots()
 ax.plot(df['date'], df['death'], label='Deaths')
@@ -69,4 +74,5 @@ ax.set_title('Deaths and Hospitalizations Due to COVID-19 in the United States')
 ax.legend()
 
 plt.show()
+
 connection.close
