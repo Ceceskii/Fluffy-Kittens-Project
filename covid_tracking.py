@@ -53,18 +53,34 @@ connection.execute(text('DROP TABLE covid'))
 connection.execute(text('ALTER TABLE covid_2 RENAME TO covid'))
 
 #df = pd.read_sql_table('covid', connection)
-
+#https://eazybi.com/blog/data-visualization-and-chart-types
 df = pd.read_csv('https://api.covidtracking.com/v1/us/daily.csv')
 
+# type of hospitalized patients
+fig, ax = plt.subplots()
+patients = ['positive', 'negative', 'pending', 'hospitalized']
+counts = [28756489, 74582825, 3548787, 776361]
+bar_labels = ['pink', 'green', 'orange', 'purple']
+bar_colors = ['tab:pink', 'tab:green', 'tab:orange', 'tab:purple']
 
+ax.bar(patients, counts, label=bar_labels, color=bar_colors)
+
+ax.set_ylabel('patients supply')
+ax.set_title('Hospitalized Patients')
+ax.legend(title='Patients')
+
+plt.show()
+
+# types of hospitalization
 df['date'] = pd.to_datetime(df['date'], format='%Y%m%d')
 fig, ax = plt.subplots()
-labels = 'Positive', 'Negative', 'Pending'
-sizes = [df['positive'].max(), df['negative'].max(), df['pending'].max()]
+labels = 'Regular Hospital Care', 'Intensive Care', 'On Ventilation'
+sizes = [df['hospitalizedCumulative'].max(), df['inIcuCumulative'].max(), df['onVentilatorCumulative'].max()]
 ax.pie(sizes, labels=labels, autopct='%1.1f%%')
 
 plt.show()
 
+# hospitalized vs deaths
 fig, ax = plt.subplots()
 ax.plot(df['date'], df['death'], label='Deaths')
 ax.plot(df['date'], df['hospitalized'], label='Hospitalizations')
