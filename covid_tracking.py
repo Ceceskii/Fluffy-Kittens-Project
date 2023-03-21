@@ -60,12 +60,12 @@ df = pd.read_csv('https://api.covidtracking.com/v1/us/daily.csv')
 fig, ax = plt.subplots()
 patients = ['positive', 'negative', 'pending', 'hospitalized']
 counts = [28756489, 74582825, 3548787, 776361]
-bar_labels = ['pink', 'green', 'orange', 'purple']
+bar_labels = ['positive', 'negative', 'pending', 'hospitalized']
 bar_colors = ['tab:pink', 'tab:green', 'tab:orange', 'tab:purple']
 
 ax.bar(patients, counts, label=bar_labels, color=bar_colors)
 
-ax.set_ylabel('patients supply')
+ax.set_ylabel('Numbers of patients')
 ax.set_title('Hospitalized Patients')
 ax.legend(title='Patients')
 
