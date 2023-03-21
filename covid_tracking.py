@@ -93,4 +93,4 @@ plt.show()
 
 connection.close
 
-# Thank you Matt Bennett for being a good advisor on which plots would fit our data!
+# Thank you Matt for being a good advisor on which plots would fit our data!
