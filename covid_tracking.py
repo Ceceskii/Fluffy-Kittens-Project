@@ -29,10 +29,10 @@ print(tables.columns)
 print(tables.dtypes)
 
 # install cryptography
-hostname="127.0.0.1"
-username="root"
-passwd=""
-db_name="FluffyTrack"
+hostname="167.99.13.70"
+username="pythoneverything"
+passwd="python123"
+db_name="FluffyTracking"
 
 # install pymysql and sqlalchemy
 engine = create_engine("mysql+pymysql://{user}:{pw}@{host}/{db}".format(host=hostname, db=db_name, user=username, pw=passwd))
